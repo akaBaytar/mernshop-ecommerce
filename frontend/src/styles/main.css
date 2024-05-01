@@ -8,3 +8,8 @@ body {
 main {
   min-height: 80vh;
 }
+
+a {
+  text-decoration: none;
+  color: var(--bs-dark);
+}

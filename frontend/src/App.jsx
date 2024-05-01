@@ -1,4 +1,6 @@
 import { Fragment } from 'react';
+import { Outlet } from 'react-router-dom';
+
 import { Container } from 'react-bootstrap';
 
 import Header from './layout/Header';
@@ -10,7 +12,7 @@ const App = () => {
       <Header />
       <main className='py-3'>
         <Container>
-          <h1>Welcome to MERN Shop</h1>
+          <Outlet />
         </Container>
       </main>
       <Footer />
