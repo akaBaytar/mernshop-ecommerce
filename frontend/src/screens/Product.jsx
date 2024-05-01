@@ -1,15 +1,24 @@
-import { Fragment } from 'react';
+import axios from 'axios';
+
+import { Fragment, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Button, Badge } from 'react-bootstrap';
 
 import Rating from '../components/Rating';
 
-import PRODUCTS from '../../mock/products';
-
 const Product = () => {
   const { id } = useParams();
 
-  const product = PRODUCTS.find((product) => product._id === id);
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      const { data } = await axios.get(`/api/v1/products/${id}`);
+      setProduct(data);
+    };
+
+    getProduct();
+  }, [id]);
 
   return (
     <Fragment>
