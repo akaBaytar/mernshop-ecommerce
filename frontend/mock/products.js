@@ -1,8 +1,8 @@
 const products = [
   {
     _id: '1',
-    name: 'Airpods 2',
-    image: '../mock/images/airpods.jpg',
+    name: 'Airpods 2nd Gen',
+    image: '../mock/images/airpods.png',
     description:
       'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
     brand: 'Apple',
@@ -15,7 +15,7 @@ const products = [
   {
     _id: '2',
     name: 'iPhone 11 Pro 256GB',
-    image: '../mock/images/phone.jpg',
+    image: '../mock/images/phone.png',
     description:
       'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
     brand: 'Apple',
@@ -28,7 +28,7 @@ const products = [
   {
     _id: '3',
     name: 'Cannon EOS 80D DSLR',
-    image: '../mock/images/camera.jpg',
+    image: '../mock/images/camera.png',
     description:
       'Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design',
     brand: 'Cannon',
@@ -41,7 +41,7 @@ const products = [
   {
     _id: '4',
     name: 'Sony Playstation 4 Pro',
-    image: '../mock/images/playstation.jpg',
+    image: '../mock/images/playstation.png',
     description:
       'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
     brand: 'Sony',
@@ -54,7 +54,7 @@ const products = [
   {
     _id: '5',
     name: 'Logitech G-Series',
-    image: '../mock/images/mouse.jpg',
+    image: '../mock/images/mouse.png',
     description:
       'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
     brand: 'Logitech',
@@ -67,7 +67,7 @@ const products = [
   {
     _id: '6',
     name: 'Amazon Echo Dot',
-    image: '../mock/images/alexa.jpg',
+    image: '../mock/images/alexa.png',
     description:
       'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
     brand: 'Amazon',

@@ -13,3 +13,27 @@ a {
   text-decoration: none;
   color: var(--bs-dark);
 }
+
+.card {
+  background-color: #fefefe;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.rating {
+  margin-block-end: 0.5rem;
+  display: flex;
+  align-items: end;
+}
+
+.rating span {
+  margin-inline-end: 0.25rem;
+}
+
+.rating svg {
+  color: #f8e825;
+}
+
+.rating-text {
+  font-size: 0.75rem;
+  padding-inline-start: 0.5rem;
+}
