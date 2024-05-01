@@ -1,4 +1,4 @@
-# MERN Shop | eCommerce
+# Mern Shop | eCommerce
 
 - E-Commerce platform built with the MERN stack & Redux Toolkit.
 

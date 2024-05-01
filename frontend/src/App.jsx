@@ -1,5 +1,21 @@
+import { Fragment } from 'react';
+import { Container } from 'react-bootstrap';
+
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+
 const App = () => {
-  return <h1>App</h1>;
+  return (
+    <Fragment>
+      <Header />
+      <main className='py-3'>
+        <Container>
+          <h1>Welcome to MERN Shop</h1>
+        </Container>
+      </main>
+      <Footer />
+    </Fragment>
+  );
 };
 
 export default App;
