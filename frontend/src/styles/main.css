@@ -4,3 +4,7 @@ body {
   background-color: #ddd;
   font-family: 'Poppins', sans-serif;
 }
+
+main {
+  min-height: 80vh;
+}
