@@ -26,15 +26,17 @@ const Product = () => {
         Go Back
       </Link>
       <Row>
-        <Col md={6}>
-          <Image
-            src={product.image}
-            alt={product.name}
-            className='rounded-3 img-fluid'
-          />
+        <Col lg={6}>
+          <div className='product-image-container'>
+            <Image
+              src={product.image}
+              alt={product.name}
+              className='rounded-3 img-fluid'
+            />
+          </div>
         </Col>
-        <Col md={6} className='product-meta-data'>
-          <ListGroup variant='flush' className='rounded-3 mt-3 mt-md-0'>
+        <Col lg={6} className='product-meta-data'>
+          <ListGroup variant='flush' className='rounded-3 mt-3 mt-lg-0'>
             <ListGroup.Item>
               <h3>{product.name}</h3>
               <Badge className='bg-dark'>{product.brand}</Badge>
