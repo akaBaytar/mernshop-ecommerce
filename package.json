@@ -8,11 +8,14 @@
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm run dev --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/mock/database.js",
+    "data:destroy": "node backend/mock/database.js -destroy"
   },
   "author": "Burak Bilgili",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "mongoose": "^8.3.3"
   },

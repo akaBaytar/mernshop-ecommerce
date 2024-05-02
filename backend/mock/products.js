@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Airpods 2nd Gen',
     image: '../src/assets/airpods.png',
     description:
@@ -10,10 +9,9 @@ const products = [
     price: 89.99,
     countInStock: 10,
     rating: 4.5,
-    numReviews: 12,
+    numReviews: 17,
   },
   {
-    _id: '2',
     name: 'iPhone 11 Pro 256GB',
     image: '../src/assets/phone.png',
     description:
@@ -23,10 +21,9 @@ const products = [
     price: 599.99,
     countInStock: 7,
     rating: 4.0,
-    numReviews: 8,
+    numReviews: 5,
   },
   {
-    _id: '3',
     name: 'Cannon EOS 80D DSLR',
     image: '../src/assets/camera.png',
     description:
@@ -39,8 +36,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
-    name: 'Sony Playstation 4 Pro',
+    name: 'Sony Playstation 5',
     image: '../src/assets/playstation.png',
     description:
       'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Logitech G-Series',
     image: '../src/assets/mouse.png',
     description:
@@ -62,10 +57,9 @@ const products = [
     price: 49.99,
     countInStock: 7,
     rating: 3.5,
-    numReviews: 10,
+    numReviews: 13,
   },
   {
-    _id: '6',
     name: 'Amazon Echo Dot',
     image: '../src/assets/alexa.png',
     description:
@@ -75,7 +69,7 @@ const products = [
     price: 29.99,
     countInStock: 0,
     rating: 4,
-    numReviews: 12,
+    numReviews: 18,
   },
 ];
 
