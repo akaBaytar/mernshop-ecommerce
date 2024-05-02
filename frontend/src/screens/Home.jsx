@@ -1,33 +1,31 @@
-import axios from 'axios';
-
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
+
+import { useGetAllProductsQuery } from '../slices/productsApiSlice';
 
 import Product from '../components/Product';
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const { data } = await axios.get('/api/v1/products');
-
-      setProducts(data);
-    };
-
-    getProducts();
-  }, []);
+  const { data: products, isLoading, error } = useGetAllProductsQuery();
 
   return (
     <Fragment>
-      <h2>Latest Products</h2>
-      <Row>
-        {products.map((product) => (
-          <Col sm={12} md={6} lg={4} key={product._id}>
-            <Product product={product} />
-          </Col>
-        ))}
-      </Row>
+      {isLoading ? (
+        <h2>loading...</h2>
+      ) : error ? (
+        <div>{error?.data?.message || error?.error}</div>
+      ) : (
+        <Fragment>
+          <h2>Latest Products</h2>
+          <Row>
+            {products.map((product) => (
+              <Col sm={12} md={6} lg={4} key={product._id}>
+                <Product product={product} />
+              </Col>
+            ))}
+          </Row>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
