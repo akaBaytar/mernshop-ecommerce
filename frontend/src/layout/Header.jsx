@@ -1,11 +1,13 @@
 import { LinkContainer } from 'react-router-bootstrap';
-
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
 import { FaShoppingBag, FaUser } from 'react-icons/fa';
 
 import LOGO from '/logo.png';
 
 const Header = () => {
+  const { cartItems } = useSelector((state) => state.cart);
+
   return (
     <header>
       <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
@@ -20,7 +22,10 @@ const Header = () => {
           <Navbar.Collapse id='navbar-nav'>
             <Nav className='ms-auto'>
               <LinkContainer to='/cart'>
-                <Nav.Link className='d-flex align-items-center gap-1'>
+                <Nav.Link className='position-relative d-flex align-items-center gap-1'>
+                  <Badge pill bg='secondary' className='position-absolute'>
+                    {cartItems.length}
+                  </Badge>
                   <FaShoppingBag />
                   Cart
                 </Nav.Link>

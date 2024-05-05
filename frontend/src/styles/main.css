@@ -64,3 +64,10 @@ a {
   padding: 0.25rem 0;
   font-weight: bold;
 }
+
+.position-absolute.badge {
+  top: -3px;
+  left: 15px;
+  scale: 0.75;
+  padding: 4px 7px;
+}
