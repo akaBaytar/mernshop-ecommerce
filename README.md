@@ -1,7 +1,6 @@
-# Mern Shop | eCommerce
+# Mern Shop | eCommerce Platform
 
 - E-Commerce platform built with the MERN stack & Redux Toolkit.
-
 - Full-featured shopping cart with PayPal & credit/debit payments.
 
 ## Features
@@ -32,9 +31,9 @@
 ```
 NODE_ENV = development
 PORT = 5000
-MONGO_URI = MONGO_DB_URI
-JWT_SECRET = 'SECRET'
-PAYPAL_CLIENT_ID = PAYPAL_CLIENT_ID
+MONGO_URI = [MONGO_DB_URI]
+PAYPAL_CLIENT_ID = [PAYPAL_CLIENT_ID]
+JWT_SECRET = [SECRET]
 PAGINATION_LIMIT = 6
 ```
 
