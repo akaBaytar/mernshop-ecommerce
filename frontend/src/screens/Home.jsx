@@ -4,19 +4,23 @@ import { Row, Col } from 'react-bootstrap';
 import { useGetAllProductsQuery } from '../slices/productsApiSlice';
 
 import Product from '../components/Product';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetAllProductsQuery();
 
   return (
     <Fragment>
+      <h2>Latest Products</h2>
       {isLoading ? (
-        <h2>loading...</h2>
+        <Loader />
       ) : error ? (
-        <div>{error?.data?.message || error?.error}</div>
+        <Message variant='danger'>
+          {error?.data?.message || error?.error}
+        </Message>
       ) : (
         <Fragment>
-          <h2>Latest Products</h2>
           <Row>
             {products.map((product) => (
               <Col sm={12} md={6} lg={4} key={product._id}>

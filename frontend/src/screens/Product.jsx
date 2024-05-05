@@ -5,6 +5,8 @@ import { Row, Col, Image, ListGroup, Button, Badge } from 'react-bootstrap';
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice';
 
 import Rating from '../components/Rating';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const Product = () => {
   const { id } = useParams();
@@ -17,9 +19,11 @@ const Product = () => {
         Go Back
       </Link>
       {isLoading ? (
-        <h2>loading...</h2>
+        <Loader />
       ) : error ? (
-        <div>{error?.data?.message || error?.error}</div>
+        <Message variant='danger'>
+          {error?.data?.message || error?.error}
+        </Message>
       ) : (
         <Row>
           <Col lg={6}>
