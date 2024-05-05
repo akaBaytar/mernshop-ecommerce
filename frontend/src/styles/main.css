@@ -14,6 +14,11 @@ a {
   color: var(--bs-dark);
 }
 
+select,
+option {
+  cursor: pointer;
+}
+
 .card {
   background-color: #fefefe;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -73,5 +78,128 @@ a {
 
   @media (width >= 768px) {
     left: 15px;
+  }
+}
+
+.cart-meta-data .list-group {
+  border-radius: 5px;
+}
+
+.cart-meta-data .list-group-item {
+  background-color: rgba(256, 256, 256, 60%);
+  padding-block: 0.6rem;
+  text-align: center;
+
+  img {
+    width: 75%;
+    display: block;
+    margin-inline: auto;
+    border-radius: 5px;
+
+    @media (width >= 768px) {
+      width: 100%;
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @media (width >= 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  p.item-name {
+    margin-block: 0;
+    font-size: 1.25rem;
+
+    @media (width >= 768px) {
+      font-size: 0.8rem;
+    }
+  }
+
+  select {
+    width: 33%;
+    text-align: center;
+    padding: 0.5rem 0;
+    margin-inline: auto;
+
+    @media (width >= 768px) {
+      width: 100%;
+    }
+  }
+
+  button.delete-btn {
+    width: 33%;
+    margin-inline: auto;
+
+    @media (width >= 768px) {
+      width: 100%;
+    }
+  }
+}
+
+.cart-meta-data .card {
+  margin-block-start: 3rem;
+  border: none;
+  background-color: rgba(256, 256, 256, 0%);
+
+  h2 {
+    margin-block-start: 0.75rem;
+
+    @media (width >= 768px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (width>=768px) {
+    margin-block-start: -1px;
+  }
+
+  .list-group-item:not(:nth-last-child(1)) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      padding-block-start: 1rem;
+    }
+  }
+
+  @media (width >= 768px) {
+    p {
+      font-size: 0.8rem;
+    }
+
+    strong {
+      font-size: 0.9rem;
+    }
+
+    button {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (width >= 992px) {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    strong {
+      font-size: 1rem;
+    }
+
+    button {
+      font-size: 1rem;
+      padding-block: 1rem;
+    }
   }
 }
