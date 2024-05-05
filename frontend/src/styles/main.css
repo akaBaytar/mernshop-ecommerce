@@ -66,8 +66,12 @@ a {
 }
 
 .position-absolute.badge {
-  top: -3px;
-  left: 15px;
   scale: 0.75;
   padding: 4px 7px;
+  top: -3px;
+  left: 7px;
+
+  @media (width >= 768px) {
+    left: 15px;
+  }
 }
