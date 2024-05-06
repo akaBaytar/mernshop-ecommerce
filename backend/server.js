@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDatabase from './config/database.js';
 
 import product from './routes/product.js';
+import user from './routes/user.js';
 
 import { notFound, errorHandler } from './error/errorHandler.js';
 
@@ -19,6 +20,7 @@ app.get('/', (_, res) => res.send('API is running...'));
 
 // routes
 app.use('/api/v1/products', product);
+app.use('/api/v1/users', user);
 
 // errors
 app.use(notFound);
