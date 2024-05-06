@@ -7,6 +7,7 @@ import LOGO from '/logo.png';
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
+  const itemsInCarts = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   return (
     <header>
@@ -24,7 +25,7 @@ const Header = () => {
               <LinkContainer to='/cart'>
                 <Nav.Link className='position-relative d-flex align-items-center gap-1'>
                   <Badge pill bg='secondary' className='position-absolute'>
-                    {cartItems.length}
+                    {itemsInCarts}
                   </Badge>
                   <FaShoppingBag />
                   Cart
