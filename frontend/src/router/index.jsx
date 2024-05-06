@@ -15,6 +15,7 @@ import Login from '../screens/Login.jsx';
 import Register from '../screens/Register.jsx';
 import Shipping from '../screens/Shipping.jsx';
 import Profile from '../screens/Profile.jsx';
+import Payment from '../screens/Payment.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route element={<PrivateRoute />}>
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/payment' element={<Payment />} />
       </Route>
     </Route>
   )
