@@ -6,12 +6,15 @@ import {
 
 import App from '../App.jsx';
 
+import PrivateRoute from '../components/PrivateRoute.jsx';
+
 import Home from '../screens/Home.jsx';
 import Product from '../screens/Product.jsx';
 import Cart from '../screens/Cart.jsx';
 import Login from '../screens/Login.jsx';
 import Register from '../screens/Register.jsx';
 import Shipping from '../screens/Shipping.jsx';
+import Profile from '../screens/Profile.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +24,11 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<Cart />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/shipping' element={<Shipping />} />
+
+      <Route element={<PrivateRoute />}>
+        <Route path='/shipping' element={<Shipping />} />
+        <Route path='/profile' element={<Profile />} />
+      </Route>
     </Route>
   )
 );
