@@ -16,6 +16,10 @@ connectDatabase(); // mongoDB
 
 const app = express();
 
+// middlewares
+app.use(express.json()); // body raw json data parser
+app.use(express.urlencoded({ extended: true })); // form urlencoded parser
+
 app.get('/', (_, res) => res.send('API is running...'));
 
 // routes
