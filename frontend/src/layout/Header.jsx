@@ -1,4 +1,4 @@
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
 import { FaShoppingBag, FaUser } from 'react-icons/fa';
@@ -9,34 +9,51 @@ const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const itemsInCarts = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
+  const { userInfo } = useSelector((state) => state.auth);
+
   return (
     <header>
       <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
         <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand className='d-flex align-items-center'>
+          <Link to='/'>
+            <Navbar.Brand as='span' className='d-flex align-items-center'>
               <img src={LOGO} alt='logo' width={40} />
               <span>Mern Shop</span>
             </Navbar.Brand>
-          </LinkContainer>
+          </Link>
           <Navbar.Toggle aria-controls='navbar-nav' className='px-2' />
           <Navbar.Collapse id='navbar-nav'>
             <Nav className='ms-auto'>
-              <LinkContainer to='/cart'>
-                <Nav.Link className='position-relative d-flex align-items-center gap-1'>
+              <Link to='/cart'>
+                <Nav.Link
+                  as='span'
+                  className='position-relative d-flex align-items-center gap-1'>
                   <Badge pill bg='secondary' className='position-absolute'>
                     {itemsInCarts}
                   </Badge>
                   <FaShoppingBag />
                   Cart
                 </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to='/login'>
-                <Nav.Link className='d-flex align-items-center gap-1'>
-                  <FaUser />
-                  Login
-                </Nav.Link>
-              </LinkContainer>
+              </Link>
+              {userInfo ? (
+                <Link to='/profile'>
+                  <Nav.Link
+                    as='span'
+                    className='d-flex align-items-center gap-1'>
+                    <FaUser />
+                    {userInfo.name}
+                  </Nav.Link>
+                </Link>
+              ) : (
+                <Link to='/login'>
+                  <Nav.Link
+                    as='span'
+                    className='d-flex align-items-center gap-1'>
+                    <FaUser />
+                    Login
+                  </Nav.Link>
+                </Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

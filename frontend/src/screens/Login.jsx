@@ -1,16 +1,43 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Form, Button, Row, Col, Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import FormContainer from '../components/FormContainer';
+
+import { useLoginMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const submitHandler = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const redirect = params.get('redirect') || '/';
+
+  useEffect(() => {
+    if (userInfo) navigate(redirect);
+  }, [userInfo, redirect, navigate]);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log('submit');
+
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate(redirect);
+    } catch (error) {
+      toast.error(error?.data?.message || error?.error);
+    }
   };
 
   return (
@@ -38,14 +65,28 @@ const Login = () => {
         </Form.Group>
 
         <div className='d-grid'>
-          <Button type='submit' variant='dark' className='mt-3'>
-            Sign In
+          <Button
+            type='submit'
+            variant='dark'
+            className='mt-3 py-2'
+            disabled={isLoading}>
+            {isLoading ? (
+              <Spinner style={{ height: '1rem', width: '1rem' }} />
+            ) : (
+              'Sign In'
+            )}
           </Button>
         </div>
       </Form>
       <Row className='py-3'>
         <Col>
-          New customer? <Link to='/register'>Register here.</Link>
+          <small>
+            New customer?{' '}
+            <Link
+              to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+              Register here.
+            </Link>
+          </small>
         </Col>
       </Row>
     </FormContainer>
