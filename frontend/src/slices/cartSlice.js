@@ -33,9 +33,14 @@ const cartSlice = createSlice({
 
       return updateCart(state);
     },
+
+    resetCartWhenLogout: (state) => {
+      state.cartItems = [];
+      localStorage.removeItem('cart');
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, resetCartWhenLogout } = cartSlice.actions;
 
 export default cartSlice.reducer;

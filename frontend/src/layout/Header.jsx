@@ -1,15 +1,36 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Navbar, Nav, Container, Badge, NavDropdown } from 'react-bootstrap';
 import { FaShoppingBag, FaUser } from 'react-icons/fa';
 
 import LOGO from '/logo.png';
+
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
+import { resetCartWhenLogout } from '../slices/cartSlice';
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const itemsInCarts = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   const { userInfo } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      dispatch(resetCartWhenLogout());
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <header>
@@ -36,14 +57,14 @@ const Header = () => {
                 </Nav.Link>
               </Link>
               {userInfo ? (
-                <Link to='/profile'>
-                  <Nav.Link
-                    as='span'
-                    className='d-flex align-items-center gap-1'>
-                    <FaUser />
-                    {userInfo.name}
-                  </Nav.Link>
-                </Link>
+                <NavDropdown title={userInfo.name} id='username'>
+                  <NavDropdown.Item>
+                    <Link to='/profile'>Profile</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
               ) : (
                 <Link to='/login'>
                   <Nav.Link
