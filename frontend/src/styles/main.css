@@ -203,3 +203,38 @@ option {
     }
   }
 }
+
+.checkout-progress-container {
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: default;
+
+  @media (width < 500px) {
+    font-size: 0.75rem;
+  }
+
+  & > * {
+    min-width: 25%;
+  }
+}
+
+.checkout-progress-container .progress-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding-block: 1rem;
+  margin-inline: 0;
+
+  & > svg {
+    color: var(--bs-dark);
+    font-size: 1.25rem;
+
+    @media (width < 500px) {
+      font-size: 1rem;
+    }
+  }
+}
