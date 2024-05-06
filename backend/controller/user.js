@@ -1,7 +1,6 @@
-import jwt from 'jsonwebtoken';
-
 import User from '../models/User.js';
 import asyncHandler from '../middleware/asyncHandler.js';
+import generateToken from '../utilities/generateToken.js';
 
 // @desc      auth user & get token
 // @route     POST /api/v1/users/login
@@ -12,17 +11,7 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '30d',
-    });
-
-    // set jwt as http-only cookie
-    res.cookie('jwt', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== 'development',
-      sameSite: 'strict',
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    });
+    generateToken(res, user._id);
 
     res.json({
       _id: user._id,
@@ -40,14 +29,46 @@ const authUser = asyncHandler(async (req, res) => {
 // @route     POST /api/v1/users
 // @access    public
 const registerUser = asyncHandler(async (req, res) => {
-  res.send('register user');
+  const { name, email, password } = req.body;
+
+  const isUserExists = await User.findOne({ email });
+
+  if (isUserExists) {
+    res.status(400);
+    throw new Error('User already exists.');
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+
+  if (user) {
+    generateToken(res, user._id);
+
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data.');
+  }
 });
 
 // @desc      logout user & clear cookie
 // @route     POST /api/v1/users/logout
 // @access    private
 const logoutUser = asyncHandler(async (req, res) => {
-  res.send('logout user');
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expiresIn: new Date(0),
+  });
+
+  res.status(200).json({ message: 'Logged out successfully.' });
 });
 
 // @desc      get user profile
