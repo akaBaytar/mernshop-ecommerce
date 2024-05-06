@@ -203,13 +203,3 @@ option {
     }
   }
 }
-
-.navbar .dropdown-menu {
-  margin-block-start: 0;
-  max-width: fit-content;
-
-  @media (width >= 768px) {
-    margin-block-start: 12px;
-    margin-inline-start: -5rem;
-  }
-}
