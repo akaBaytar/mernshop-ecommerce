@@ -44,9 +44,9 @@ const cartSlice = createSlice({
       return updateCart(state);
     },
 
-    resetCartWhenLogout: (state) => {
+    clearCartItems: (state) => {
       state.cartItems = [];
-      localStorage.removeItem('cart');
+      return updateCart(state);
     },
   },
 });
@@ -56,7 +56,7 @@ export const {
   removeFromCart,
   saveShippingAddress,
   savePaymentMethod,
-  resetCartWhenLogout,
+  clearCartItems,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

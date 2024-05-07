@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { logout } from '../slices/authSlice';
-import { resetCartWhenLogout } from '../slices/cartSlice';
+import { clearCartItems } from '../slices/cartSlice';
 
 import { useLogoutMutation } from '../slices/usersApiSlice';
 
@@ -20,7 +20,7 @@ const Profile = () => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
-      dispatch(resetCartWhenLogout());
+      dispatch(clearCartItems());
       navigate('/');
     } catch (error) {
       console.error(error);
