@@ -25,7 +25,7 @@ const order = new mongoose.Schema(
     shippingAddress: {
       address: { type: String, reuired: true },
       city: { type: String, reuired: true },
-      postalCode: { type: String, reuired: true },
+      postal: { type: String, reuired: true },
       country: { type: String, reuired: true },
     },
 
@@ -39,12 +39,6 @@ const order = new mongoose.Schema(
       status: { type: String },
       update_time: { type: String },
       email_address: { type: String },
-    },
-
-    itemsPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
     },
 
     taxPrice: {

@@ -17,6 +17,7 @@ import Shipping from '../screens/Shipping.jsx';
 import Profile from '../screens/Profile.jsx';
 import Payment from '../screens/Payment.jsx';
 import Order from '../screens/Order.jsx';
+import OrderDetails from '../screens/OrderDetails.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
         <Route path='/profile' element={<Profile />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/place-order' element={<Order />} />
+        <Route path='/orders/:id' element={<OrderDetails />} />
       </Route>
     </Route>
   )
