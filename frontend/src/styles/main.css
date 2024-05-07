@@ -14,6 +14,24 @@ a {
   color: var(--bs-dark);
 }
 
+tr,
+td {
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+table {
+  margin-block-start: 0.5rem;
+}
+
+th:first-of-type {
+  border-top-left-radius: 8px;
+}
+
+th:last-of-type {
+  border-top-right-radius: 8px;
+}
+
 select,
 option,
 label {
@@ -284,4 +302,11 @@ label {
       background-color: rgba(256, 256, 256, 30%);
     }
   }
+}
+
+.order-details-btn {
+  border: 1px solid #ccc;
+  color: #777;
+  padding: 0.1rem;
+  border-radius: 5px;
 }

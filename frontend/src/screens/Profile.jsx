@@ -5,9 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { toast } from 'react-toastify';
 
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+
+import { FaTimes } from 'react-icons/fa';
+
 import { logout, setCredentials } from '../slices/authSlice';
 import { clearCartItems } from '../slices/cartSlice';
-
+import { useGetMyOrdersQuery } from '../slices/ordersApiSlice';
 import { useLogoutMutation, useProfileMutation } from '../slices/usersApiSlice';
 
 const Profile = () => {
@@ -24,6 +29,12 @@ const Profile = () => {
   const [logoutApiCall] = useLogoutMutation();
 
   const [updateProfile, { isLoading }] = useProfileMutation();
+
+  const {
+    data: orders,
+    isLoading: isOrdersLoading,
+    error,
+  } = useGetMyOrdersQuery();
 
   useEffect(() => {
     if (userInfo) {
@@ -81,6 +92,7 @@ const Profile = () => {
       <hr />
       <Row>
         <Col md={4}>
+          <h5>{userInfo.name}</h5>
           <Form onSubmit={submitHandler}>
             <Form.Group controlId='name' className='my-2'>
               <Form.Label>Name:</Form.Label>
@@ -137,7 +149,67 @@ const Profile = () => {
             </div>
           </Form>
         </Col>
-        <Col md={8}></Col>
+        <Col md={8} className='my-4 my-md-0'>
+          <h5>Order History</h5>
+          {isOrdersLoading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant='danger'>
+              {error?.data?.message || error?.error}
+            </Message>
+          ) : (
+            <Table className='table-sm' striped hover responsive>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>DATE</th>
+                  <th>TOTAL</th>
+                  <th>PAID</th>
+                  <th>DELIVERED</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map(
+                  ({
+                    _id,
+                    createdAt,
+                    totalPrice,
+                    isPaid,
+                    paidAt,
+                    isDelivered,
+                    deliveredAt,
+                  }) => (
+                    <tr key={_id}>
+                      <td>{_id}</td>
+                      <td>{createdAt.substring(0, 10)}</td>
+                      <td>${totalPrice}</td>
+                      <td>
+                        {isPaid ? (
+                          paidAt.substring(0, 10)
+                        ) : (
+                          <FaTimes />
+                        )}
+                      </td>
+                      <td>
+                        {isDelivered ? (
+                          deliveredAt.substring(0, 10)
+                        ) : (
+                          <FaTimes />
+                        )}
+                      </td>
+                      <td>
+                        <Link to={`/orders/${_id}`} className='order-details-btn'>
+                          Details
+                        </Link>
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </Table>
+          )}
+        </Col>
       </Row>
     </Fragment>
   );
