@@ -248,3 +248,40 @@ label {
     border-color: #bbb;
   }
 }
+.order-col {
+  border-radius: 10px !important;
+}
+
+.order-meta-data .list-group-item {
+  background-color: rgba(256, 256, 256, 60%);
+  padding-block: 0.6rem;
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @media (width >= 768px) {
+      flex-direction: row;
+      gap: 0;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.place-order-card {
+  border: none;
+  margin-block-start: 3rem;
+
+  @media (width >= 768px) {
+    margin-block-start: 0;
+  }
+
+  background-color: rgba(256, 256, 256, 30%);
+  & > div {
+    background-color: rgba(256, 256, 256, 30%);
+    > div {
+      background-color: rgba(256, 256, 256, 30%);
+    }
+  }
+}

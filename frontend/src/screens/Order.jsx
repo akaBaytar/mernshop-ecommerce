@@ -71,28 +71,28 @@ const Order = () => {
   return (
     <Fragment>
       <CheckoutProgress step1 step2 step3 step4 />
+      <h1>Place Order</h1>
+      <hr />
       <Row>
         <Col md={8}>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <h2>Shipping</h2>
-              <p>
-                <strong>Address:</strong> {address}, {city}, {postal}, {country}
-              </p>
+          <ListGroup variant='flush' className='order-meta-data'>
+            <ListGroup.Item className='rounded-top-2'>
+              <h3>Shipping</h3>
+              <strong>Address:</strong> {address}, {city}, {postal}, {country}
             </ListGroup.Item>
             <ListGroup.Item>
-              <h2>Payment</h2>
+              <h3>Payment</h3>
               <strong>Method:</strong> {paymentMethod}
             </ListGroup.Item>
-            <ListGroup.Item>
-              <h2>Order Items</h2>
+            <ListGroup.Item className='rounded-bottom-3'>
+              <h3>Order Items</h3>
               {cartItems.length === 0 ? (
                 <Message variant='secondary'>Your cart is empty.</Message>
               ) : (
-                <ListGroup variant='flush'>
+                <ListGroup variant='flush' className='rounded-bottom-3'>
                   {cartItems.map(
                     ({ image, name, product, qty, price }, index) => (
-                      <ListGroup.Item key={index}>
+                      <ListGroup.Item key={index} className='rounded-top-3'>
                         <Row>
                           <Col md={2}>
                             <Image src={image} alt={name} fluid rounded />
@@ -113,10 +113,10 @@ const Order = () => {
           </ListGroup>
         </Col>
         <Col md={4}>
-          <Card>
+          <Card className='place-order-card'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <h2>Order Summary</h2>
+                <h3>Order Summary</h3>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
