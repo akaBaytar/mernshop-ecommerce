@@ -4,7 +4,6 @@
 
 ## Features
 
-- Full featured shopping cart
 - Product reviews and ratings
 - Top products carousel
 - Product pagination
@@ -20,11 +19,10 @@
 ## Usage
 
 1)  Create a [MongoDB database](https://www.mongodb.com/cloud/atlas/register) and obtain your `MongoDB URI`.
-2)  Create a [PayPal account](https://developer.paypal.com/) and obtain your `Client ID`.
 
 #### Env Variables
 
-3) Create the `.env` file with following variables:
+2) Create the `.env` file with following variables:
 
 ```
 NODE_ENV = development
@@ -34,7 +32,7 @@ JWT_SECRET = [SECRET]
 PAGINATION_LIMIT = 6
 ```
 
-4) Change the `JWT_SECRET` and `PAGINATION_LIMIT` to what you want.
+3) Change the `JWT_SECRET` and `PAGINATION_LIMIT` to what you want.
 
 #### Install Dependencies
 
@@ -65,7 +63,7 @@ npm run build
 
 #### Seed Database
 
-You can use the following commands to seed the database with some sample users and products as well as destroy all data.
+4) You can use the following commands to seed the database with some sample users and products as well as destroy all data.
 
 ```
 # Import data
