@@ -9,7 +9,7 @@ import CheckoutProgress from '../layout/CheckoutProgress';
 import FormContainer from '../components/FormContainer';
 
 const Payment = () => {
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,7 +44,28 @@ const Payment = () => {
               id='PayPal'
               name='paymentMethod'
               value='Paypal'
-              checked
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            />
+          </Col>
+          <Col>
+            <Form.Check
+              type='radio'
+              className='my-2'
+              label='Strapi'
+              id='strapi'
+              name='paymentMethod'
+              value='Strapi'
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            />
+          </Col>
+          <Col>
+            <Form.Check
+              type='radio'
+              className='my-2'
+              label='Iyzico'
+              id='iyzico'
+              name='paymentMethod'
+              value='Iyzico'
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
           </Col>
