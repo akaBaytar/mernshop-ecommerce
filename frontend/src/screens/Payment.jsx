@@ -55,8 +55,7 @@ const Payment = () => {
               label='Credit Card'
               id='CreditCard'
               name='paymentMethod'
-              value='CreditCard'
-              checked
+              value='Credit Card'
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
           </Col>
