@@ -11,11 +11,11 @@ import {
   FormControl,
 } from 'react-bootstrap';
 
-import { addToCart, removeFromCart } from '../slices/cartSlice';
+import { addToCart, removeFromCart } from '../../slices/cartSlice';
 
 import { FaTrash } from 'react-icons/fa';
 
-import Message from '../components/Message';
+import Message from '../../components/Message';
 
 const Cart = () => {
   const navigate = useNavigate();

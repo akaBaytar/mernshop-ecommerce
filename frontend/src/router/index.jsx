@@ -7,17 +7,21 @@ import {
 import App from '../App.jsx';
 
 import PrivateRoute from '../components/PrivateRoute.jsx';
+import AdminRoute from '../components/AdminRoute.jsx';
 
-import Home from '../screens/Home.jsx';
-import Product from '../screens/Product.jsx';
-import Cart from '../screens/Cart.jsx';
-import Login from '../screens/Login.jsx';
-import Register from '../screens/Register.jsx';
-import Shipping from '../screens/Shipping.jsx';
-import Profile from '../screens/Profile.jsx';
-import Payment from '../screens/Payment.jsx';
-import Order from '../screens/Order.jsx';
-import OrderDetails from '../screens/OrderDetails.jsx';
+import Home from '../screens/public/Home.jsx';
+import Product from '../screens/public/Product.jsx';
+import Cart from '../screens/public/Cart.jsx';
+import Login from '../screens/public/Login.jsx';
+import Register from '../screens/public/Register.jsx';
+
+import Shipping from '../screens/private/Shipping.jsx';
+import Profile from '../screens/private/Profile.jsx';
+import Payment from '../screens/private/Payment.jsx';
+import Order from '../screens/private/Order.jsx';
+import OrderDetails from '../screens/public/OrderDetails.jsx';
+
+import OrderList from '../screens/admin/OrderList.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +38,10 @@ const router = createBrowserRouter(
         <Route path='/payment' element={<Payment />} />
         <Route path='/place-order' element={<Order />} />
         <Route path='/orders/:id' element={<OrderDetails />} />
+      </Route>
+
+      <Route element={<AdminRoute />}>
+        <Route path='/admin/orders' element={<OrderList />} />
       </Route>
     </Route>
   )

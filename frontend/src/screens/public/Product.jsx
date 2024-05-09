@@ -11,12 +11,12 @@ import {
   Form,
 } from 'react-bootstrap';
 
-import { useGetProductDetailsQuery } from '../slices/productsApiSlice';
-import { addToCart } from '../slices/cartSlice';
+import { useGetProductDetailsQuery } from '../../slices/productsApiSlice';
+import { addToCart } from '../../slices/cartSlice';
 
-import Rating from '../components/Rating';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
+import Rating from '../../components/Rating';
+import Loader from '../../components/Loader';
+import Message from '../../components/Message';
 
 const Product = () => {
   const { id } = useParams();

@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import { useGetAllProductsQuery } from '../slices/productsApiSlice';
+import { useGetAllProductsQuery } from '../../slices/productsApiSlice';
 
-import Product from '../components/Product';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
+import Product from '../../components/Product';
+import Loader from '../../components/Loader';
+import Message from '../../components/Message';
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetAllProductsQuery();

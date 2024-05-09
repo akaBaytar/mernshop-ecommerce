@@ -4,10 +4,10 @@ import { Form, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import FormContainer from '../components/FormContainer';
+import FormContainer from '../../components/FormContainer';
 
-import { useLoginMutation } from '../slices/usersApiSlice';
-import { setCredentials } from '../slices/authSlice';
+import { useLoginMutation } from '../../slices/usersApiSlice';
+import { setCredentials } from '../../slices/authSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');

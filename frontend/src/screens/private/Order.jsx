@@ -14,11 +14,11 @@ import {
 
 import { toast } from 'react-toastify';
 
-import CheckoutProgress from '../layout/CheckoutProgress';
-import Message from '../components/Message';
+import CheckoutProgress from '../../layout/CheckoutProgress';
+import Message from '../../components/Message';
 
-import { useCreateOrderMutation } from '../slices/ordersApiSlice';
-import { clearCartItems } from '../slices/cartSlice';
+import { useCreateOrderMutation } from '../../slices/ordersApiSlice';
+import { clearCartItems } from '../../slices/cartSlice';
 
 const Order = () => {
   const navigate = useNavigate();

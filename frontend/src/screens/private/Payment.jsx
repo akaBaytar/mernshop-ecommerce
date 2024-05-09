@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { savePaymentMethod } from '../slices/cartSlice';
+import { savePaymentMethod } from '../../slices/cartSlice';
 
-import CheckoutProgress from '../layout/CheckoutProgress';
-import FormContainer from '../components/FormContainer';
+import CheckoutProgress from '../../layout/CheckoutProgress';
+import FormContainer from '../../components/FormContainer';
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState('');

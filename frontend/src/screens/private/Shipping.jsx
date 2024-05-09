@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import FormContainer from '../components/FormContainer';
-import CheckoutProgress from '../layout/CheckoutProgress';
+import FormContainer from '../../components/FormContainer';
+import CheckoutProgress from '../../layout/CheckoutProgress';
 
-import { saveShippingAddress } from '../slices/cartSlice';
+import { saveShippingAddress } from '../../slices/cartSlice';
 
 const Shipping = () => {
   const { shippingAddress } = useSelector((state) => state.cart);

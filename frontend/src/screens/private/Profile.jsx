@@ -5,15 +5,18 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { toast } from 'react-toastify';
 
-import Loader from '../components/Loader';
-import Message from '../components/Message';
+import Loader from '../../components/Loader';
+import Message from '../../components/Message';
 
 import { FaTimes } from 'react-icons/fa';
 
-import { logout, setCredentials } from '../slices/authSlice';
-import { clearCartItems } from '../slices/cartSlice';
-import { useGetMyOrdersQuery } from '../slices/ordersApiSlice';
-import { useLogoutMutation, useProfileMutation } from '../slices/usersApiSlice';
+import { logout, setCredentials } from '../../slices/authSlice';
+import { clearCartItems } from '../../slices/cartSlice';
+import { useGetMyOrdersQuery } from '../../slices/ordersApiSlice';
+import {
+  useLogoutMutation,
+  useProfileMutation,
+} from '../../slices/usersApiSlice';
 
 const Profile = () => {
   const [name, setName] = useState('');
@@ -184,13 +187,7 @@ const Profile = () => {
                       <td>{_id}</td>
                       <td>{createdAt.substring(0, 10)}</td>
                       <td>${totalPrice}</td>
-                      <td>
-                        {isPaid ? (
-                          paidAt.substring(0, 10)
-                        ) : (
-                          <FaTimes />
-                        )}
-                      </td>
+                      <td>{isPaid ? paidAt.substring(0, 10) : <FaTimes />}</td>
                       <td>
                         {isDelivered ? (
                           deliveredAt.substring(0, 10)
@@ -199,7 +196,9 @@ const Profile = () => {
                         )}
                       </td>
                       <td>
-                        <Link to={`/orders/${_id}`} className='order-details-btn'>
+                        <Link
+                          to={`/orders/${_id}`}
+                          className='order-details-btn'>
                           Details
                         </Link>
                       </td>
