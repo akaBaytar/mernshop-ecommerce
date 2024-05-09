@@ -38,6 +38,10 @@ label {
   cursor: pointer;
 }
 
+textarea {
+  resize: none;
+}
+
 .card {
   background-color: #fefefe;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
