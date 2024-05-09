@@ -1,18 +1,50 @@
 import { Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import {
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Card,
+  Button,
+  Spinner,
+} from 'react-bootstrap';
+
+import { toast } from 'react-toastify';
 
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 
-import { useGetOrderDetailsQuery } from '../../slices/ordersApiSlice';
+import {
+  useGetOrderDetailsQuery,
+  useDeliverOrderMutation,
+} from '../../slices/ordersApiSlice';
 
 const OrderDetails = () => {
   const { id } = useParams();
 
-  const { data: order, isLoading, error } = useGetOrderDetailsQuery(id);
+  const { userInfo } = useSelector((state) => state.auth);
 
-  console.log(order);
+  const {
+    data: order,
+    isLoading,
+    error,
+    refetch,
+  } = useGetOrderDetailsQuery(id);
+
+  const [deliverOrder, { isLoading: isLodingDeliver }] =
+    useDeliverOrderMutation();
+
+  const clickHandler = async () => {
+    try {
+      await deliverOrder(id);
+      refetch();
+      toast.success('Order delivered.');
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
 
   return isLoading ? (
     <Fragment>
@@ -53,7 +85,7 @@ const OrderDetails = () => {
                 </p>
                 {order.isDelivered ? (
                   <Message variant='success'>
-                    Delivered on {order.deliveredAt}.
+                    Delivered on {order.deliveredAt?.substring(0, 10)}.
                   </Message>
                 ) : (
                   <Message variant='danger'>Not delivered.</Message>
@@ -61,12 +93,8 @@ const OrderDetails = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <h2>Payment</h2>
-                <p>
-                  <strong>Method: </strong>
-                  {order.paymentMethod}
-                </p>
                 {order.isPaid ? (
-                  <Message variant='success'>Paid on {order.paidAt}.</Message>
+                  <Message variant='success'>{`Paid succesfully via ${order.paymentMethod}.`}</Message>
                 ) : (
                   <Message variant='danger'>Not paid.</Message>
                 )}
@@ -93,7 +121,7 @@ const OrderDetails = () => {
           </Card>
         </Col>
         <Col md={4}>
-          <Card>
+          <Card className='mt-4 mt-md-0'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h2>Order Summary</h2>
@@ -118,6 +146,22 @@ const OrderDetails = () => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {userInfo && userInfo.isAdmin && (
+                <ListGroup.Item>
+                  <div className='d-grid'>
+                    <Button
+                      variant='dark'
+                      className='py-2'
+                      onClick={clickHandler}>
+                      {isLodingDeliver ? (
+                        <Spinner style={{ height: '1rem', width: '1rem' }} />
+                      ) : (
+                        'Mark as Delivered'
+                      )}
+                    </Button>
+                  </div>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>

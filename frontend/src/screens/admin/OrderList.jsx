@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaCheck } from 'react-icons/fa';
 
 import { useGetAllOrdersQuery } from '../../slices/ordersApiSlice';
 
@@ -38,7 +38,6 @@ const OrderList = () => {
                 createdAt,
                 totalPrice,
                 isPaid,
-                paidAt,
                 isDelivered,
                 deliveredAt,
               }) => (
@@ -49,7 +48,7 @@ const OrderList = () => {
                   <td>{user && user.name}</td>
                   <td>{createdAt.substring(0, 10)}</td>
                   <td>${totalPrice}</td>
-                  <td>{isPaid ? paidAt.substring(0, 10) : <FaTimes />}</td>
+                  <td>{isPaid ? <FaCheck /> : <FaTimes />}</td>
                   <td>
                     {isDelivered ? deliveredAt.substring(0, 10) : <FaTimes />}
                   </td>

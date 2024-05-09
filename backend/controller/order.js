@@ -98,7 +98,22 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 // @route     PUT /api/v1/orders/:id/deliver
 // @access    private | admin
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
-  res.send('update order to delivered');
+  const id = req.params.id;
+
+  const order = await Order.findById(id);
+
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+
+    res.status(200).json(updatedOrder);
+  } else {
+    res.status(404);
+
+    throw new Error(`There is no order with id: ${id}.`);
+  }
 });
 
 // @desc      get all orders
