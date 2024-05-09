@@ -4,7 +4,7 @@ import asyncHandler from '../middleware/asyncHandler.js';
 // @desc      fetch all products
 // @route     GET /api/v1/products
 // @access    public
-const getAllProducts = asyncHandler(async (req, res) => {
+const getAllProducts = asyncHandler(async (_, res) => {
   const products = await Product.find({});
 
   res.json(products);
@@ -27,4 +27,25 @@ const getProduct = asyncHandler(async (req, res) => {
   res.json(product);
 });
 
-export { getAllProducts, getProduct };
+// @desc      create product
+// @route     POST /api/v1/products
+// @access    private | admin
+const createProduct = asyncHandler(async (req, res) => {
+  const product = new Product({
+    name: 'Sample Product',
+    price: 0,
+    user: req.user._id,
+    image: '../src/assets/placeholder.jpg',
+    brand: 'Sample Brand',
+    category: 'Sample Category',
+    countInStock: 0,
+    numReviews: 0,
+    description: 'Sample description.',
+  });
+
+  const createdProduct = await product.save();
+
+  res.status(201).json(createdProduct);
+});
+
+export { getAllProducts, getProduct, createProduct };

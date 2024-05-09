@@ -155,15 +155,17 @@ const Profile = () => {
             <div className='mt-4 border border-1 border-black rounded p-2'>
               <h5>Admin Panel</h5>
               <hr className='mt-0 mb-2' />
-              <Link to='/admin/orders' className='btn btn-dark btn-sm'>
-                All Orders
-              </Link>
-              <Link to='/admin/users' className='btn btn-dark btn-sm ms-2'>
-                User List
-              </Link>
-              <Link to='/admin/products' className='btn btn-dark btn-sm ms-2'>
-                Products
-              </Link>
+              <div className='d-flex align-align-items-center gap-2'>
+                <Link to='/admin/orders' className='btn btn-dark btn-sm'>
+                  Order List
+                </Link>
+                <Link to='/admin/users' className='btn btn-dark btn-sm'>
+                  User List
+                </Link>
+                <Link to='/admin/products' className='btn btn-dark btn-sm'>
+                  Product List
+                </Link>
+              </div>
             </div>
           )}
         </Col>

@@ -1,16 +1,39 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button, Col, Row } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 
-import { useGetAllProductsQuery } from '../../slices/productsApiSlice';
+import {
+  useGetAllProductsQuery,
+  useCreateProductMutation,
+} from '../../slices/productsApiSlice';
 
 const ProductList = () => {
-  const { data: products, isLoading, error } = useGetAllProductsQuery();
+  const {
+    data: products,
+    isLoading,
+    error,
+    refetch,
+  } = useGetAllProductsQuery();
+
+  const [createProduct, { isLoading: isLoadingCreateProduct }] =
+    useCreateProductMutation();
+
+  const createProductHandler = async () => {
+    if (window.confirm('Are you sure want to create new product?')) {
+      try {
+        await createProduct();
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || error.error);
+      }
+    }
+  };
 
   const deleteHandler = (id) => {
     console.log(id, 'deleted.');
@@ -23,14 +46,17 @@ const ProductList = () => {
           <h1>Products</h1>
         </Col>
         <Col className='text-end'>
-          <Button className='btn-sm btn-dark my-3'>
+          <Button
+            className='btn-sm btn-dark my-3'
+            onClick={createProductHandler}>
             <FaEdit />
-            <span className='ms-2' style={{ fontSize: '0.65rem' }}>
+            <span className='ms-1' style={{ fontSize: '0.65rem' }}>
               Create Product
             </span>
           </Button>
         </Col>
       </Row>
+      {isLoadingCreateProduct && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
