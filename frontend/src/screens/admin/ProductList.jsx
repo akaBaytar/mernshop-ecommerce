@@ -77,7 +77,9 @@ const ProductList = () => {
             <tbody>
               {products.map(({ _id, name, price, category, brand }) => (
                 <tr key={_id}>
-                  <td>{_id}</td>
+                  <td>
+                    <Link to={`/products/${_id}`}>{_id}</Link>
+                  </td>
                   <td>{name}</td>
                   <td>${price}</td>
                   <td>{category}</td>

@@ -130,7 +130,11 @@ const OrderDetails = () => {
                 <Row>
                   <Col>Items</Col>
                   <Col>
-                    ${order.totalPrice - (order.shippingPrice + order.taxPrice)}
+                    $
+                    {(
+                      order.totalPrice -
+                      (order.shippingPrice + order.taxPrice)
+                    ).toFixed(2)}
                   </Col>
                 </Row>
                 <Row>
@@ -152,9 +156,12 @@ const OrderDetails = () => {
                     <Button
                       variant='dark'
                       className='py-2'
-                      onClick={clickHandler}>
+                      onClick={clickHandler}
+                      disabled={order.isDelivered}>
                       {isLodingDeliver ? (
                         <Spinner style={{ height: '1rem', width: '1rem' }} />
+                      ) : order.isDelivered ? (
+                        'Delivered'
                       ) : (
                         'Mark as Delivered'
                       )}
