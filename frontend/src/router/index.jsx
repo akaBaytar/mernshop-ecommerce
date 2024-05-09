@@ -22,6 +22,7 @@ import Order from '../screens/private/Order.jsx';
 import OrderDetails from '../screens/public/OrderDetails.jsx';
 
 import OrderList from '../screens/admin/OrderList.jsx';
+import ProductList from '../screens/admin/ProductList.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
 
       <Route element={<AdminRoute />}>
         <Route path='/admin/orders' element={<OrderList />} />
+        <Route path='/admin/products' element={<ProductList />} />
       </Route>
     </Route>
   )
