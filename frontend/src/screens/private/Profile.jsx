@@ -151,6 +151,21 @@ const Profile = () => {
               </Button>
             </div>
           </Form>
+          {userInfo && userInfo.isAdmin && (
+            <div className='mt-4 border border-1 border-black rounded p-2'>
+              <h5>Admin Panel</h5>
+              <hr className='mt-0 mb-2' />
+              <Link to='/admin/orders' className='btn btn-dark btn-sm'>
+                All Orders
+              </Link>
+              <Link to='/admin/users' className='btn btn-dark btn-sm ms-2'>
+                User List
+              </Link>
+              <Link to='/admin/products' className='btn btn-dark btn-sm ms-2'>
+                Products
+              </Link>
+            </div>
+          )}
         </Col>
         <Col md={8} className='my-4 my-md-0'>
           <h5>Order History</h5>
