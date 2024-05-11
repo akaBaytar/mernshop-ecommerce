@@ -123,29 +123,71 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @desc      get all users
 // @route     GET /api/v1/users
 // @access    private | admin
-const getAllUsers = asyncHandler(async (req, res) => {
-  res.send('get all users');
+const getAllUsers = asyncHandler(async (_, res) => {
+  const users = await User.find({});
+  res.status(200).json(users);
 });
 
 // @desc      get user
 // @route     GET /api/v1/users/:id
 // @access    private | admin
 const getUser = asyncHandler(async (req, res) => {
-  res.send('get user by id');
+  const id = req.params.id;
+  const user = await User.findById(id).select('-password');
+
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(404);
+    throw new Error('User not found.');
+  }
 });
 
 // @desc      update user
 // @route     PUT /api/v1/users/:id
 // @access    private | admin
 const updateUser = asyncHandler(async (req, res) => {
-  res.send('update user');
+  const id = req.params.id;
+  const user = await User.findById(id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = Boolean(req.body.isAdmin);
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found.');
+  }
 });
 
 // @desc      delete user
-// @route     GET /api/v1/users/:id
+// @route     DELETE /api/v1/users/:id
 // @access    private | admin
 const deleteUser = asyncHandler(async (req, res) => {
-  res.send('delete user');
+  const id = req.params.id;
+  const user = await User.findById(id);
+
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error('Admin users can not delete.');
+    }
+
+    await User.deleteOne({ _id: id });
+    res.status(200).json({ message: 'User deleted successfully.' });
+  } else {
+    res.status(404);
+    throw new Error('User not found.');
+  }
 });
 
 export {

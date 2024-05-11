@@ -33,6 +33,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    getAllUser: builder.query({
+      query: () => ({
+        url: `${USERS_URL}`,
+        method: 'GET',
+      }),
+      providesTags: ['Users'],
+      keepUnusedDataFor: 60,
+    }),
   }),
 });
 
@@ -41,4 +50,5 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useProfileMutation,
+  useGetAllUserQuery
 } = usersApiSlice;
