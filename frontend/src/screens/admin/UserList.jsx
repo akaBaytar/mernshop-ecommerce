@@ -1,9 +1,13 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { FaTimes, FaTrash, FaEdit, FaCheck } from 'react-icons/fa';
 
-import { useGetAllUserQuery } from '../../slices/usersApiSlice';
+import {
+  useGetAllUserQuery,
+  useDeleteUserMutation,
+} from '../../slices/usersApiSlice';
 
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -11,14 +15,24 @@ import Loader from '../../components/Loader';
 const UserList = () => {
   const { data: users, isLoading, error, refetch } = useGetAllUserQuery();
 
-  const deleteHandler = (id) => {
-    console.log(id);
-    refetch();
+  const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation();
+
+  const deleteHandler = async (id) => {
+    if (window.confirm('Are yo sure want to delete user?')) {
+      try {
+        await deleteUser(id);
+        toast.success('User deleted successfully.');
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || error.error);
+      }
+    }
   };
 
   return (
     <Fragment>
       <h1>Users</h1>
+      {isDeleting && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
