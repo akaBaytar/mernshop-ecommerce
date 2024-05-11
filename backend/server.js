@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -7,6 +8,7 @@ import connectDatabase from './config/database.js';
 import product from './routes/product.js';
 import user from './routes/user.js';
 import order from './routes/order.js';
+import upload from './routes/upload.js';
 
 import { notFound, errorHandler } from './error/errorHandler.js';
 
@@ -29,6 +31,11 @@ app.get('/', (_, res) => res.send('API is running...'));
 app.use('/api/v1/products', product);
 app.use('/api/v1/users', user);
 app.use('/api/v1/orders', order);
+app.use('/api/v1/upload', upload);
+
+// uploads
+const __dirname = path.resolve(); // set __dirname to current directory
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // errors
 app.use(notFound);

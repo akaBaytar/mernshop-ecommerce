@@ -10,6 +10,7 @@ import Loader from '../../components/Loader';
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
+  useUploadProductImageMutation,
 } from '../../slices/productsApiSlice';
 
 const ProductEdit = () => {
@@ -31,6 +32,8 @@ const ProductEdit = () => {
   } = useGetProductDetailsQuery(id);
 
   const [updateProduct, { isLoading: isUpdating }] = useUpdateProductMutation();
+
+  const [uploadProductImage] = useUploadProductImageMutation();
 
   const navigate = useNavigate();
 
@@ -71,6 +74,20 @@ const ProductEdit = () => {
     }
   };
 
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+
+    formData.append('image', e.target.files[0]);
+
+    try {
+      const res = await uploadProductImage(formData).unwrap();
+      setImage(res.image);
+      toast.success(res.message);
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
+    }
+  };
+
   return (
     <Fragment>
       <div className='d-flex justify-content-between align-items-center'>
@@ -107,6 +124,17 @@ const ProductEdit = () => {
                 placeholder='Enter price'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId='image' className='mt-2'>
+              <Form.Label>Image:</Form.Label>
+              <Form.Control type='file' onChange={uploadFileHandler} />
+              <Form.Control
+                type='text'
+                className='mt-2'
+                placeholder='Enter image URL'
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
               />
             </Form.Group>
             <Form.Group controlId='brand' className='mt-2'>
