@@ -102,7 +102,9 @@ const ProductEdit = () => {
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <Message variant='danger'>{error}</Message>
+          <Message variant='danger'>
+            {error?.data?.message || error.error}
+          </Message>
         ) : (
           <Form
             className='border border-black p-4 rounded'

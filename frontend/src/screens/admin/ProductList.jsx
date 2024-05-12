@@ -72,7 +72,9 @@ const ProductList = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant='danger'>
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <Fragment>
           <Table striped hover responsive bordered className='table-sm'>

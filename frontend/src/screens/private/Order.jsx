@@ -144,7 +144,9 @@ const Order = () => {
               </ListGroup.Item>
               {error && (
                 <ListGroupItem>
-                  <Message variant='danger'>{error}</Message>
+                  <Message variant='danger'>
+                    {error?.data?.message || error.error}
+                  </Message>
                 </ListGroupItem>
               )}
               <ListGroup.Item>

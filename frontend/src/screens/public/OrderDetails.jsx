@@ -56,7 +56,7 @@ const OrderDetails = () => {
     <Fragment>
       <h1>Order Details</h1>
       <hr />
-      <Message variant='danger'>{error}</Message>
+      <Message variant='danger'>{error?.data?.message || error.error}</Message>
     </Fragment>
   ) : (
     <Fragment>
