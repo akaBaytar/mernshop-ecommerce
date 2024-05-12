@@ -25,8 +25,6 @@ app.use(express.json()); // body raw json data parser
 app.use(express.urlencoded({ extended: true })); // form urlencoded parser
 app.use(cookieParser()); // cookie parser
 
-app.get('/', (_, res) => res.send('API is running...'));
-
 // routes
 app.use('/api/v1/products', product);
 app.use('/api/v1/users', user);
@@ -36,6 +34,17 @@ app.use('/api/v1/upload', upload);
 // uploads
 const __dirname = path.resolve(); // set __dirname to current directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+// production | development
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+  app.get('*', (_, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
+  });
+} else {
+  app.get('/', (_, res) => res.send('API is running...'));
+}
 
 // errors
 app.use(notFound);
