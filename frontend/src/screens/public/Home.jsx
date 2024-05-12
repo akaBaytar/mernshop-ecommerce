@@ -8,6 +8,7 @@ import Product from '../../components/Product';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import Pagination from '../../components/Pagination';
+import Meta from '../../components/Meta';
 import SearchBox from '../../layout/SearchBox';
 import Carousel from '../../layout/Carousel';
 
@@ -22,6 +23,7 @@ const Home = () => {
     <Fragment>
       <Carousel />
       <SearchBox />
+      <Meta />
       <h2>Latest Products</h2>
       {isLoading ? (
         <Loader />

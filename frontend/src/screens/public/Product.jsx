@@ -23,6 +23,7 @@ import { addToCart } from '../../slices/cartSlice';
 import Rating from '../../components/Rating';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import Meta from '../../components/Meta';
 
 const Product = () => {
   const { id } = useParams();
@@ -69,6 +70,7 @@ const Product = () => {
 
   return (
     <Fragment>
+      <Meta title={product?.name} />
       <Link to={'/'} className='btn btn-light my-3'>
         Go Back
       </Link>
