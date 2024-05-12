@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Table, Button, Col, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
@@ -7,6 +7,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import Pagination from '../../components/Pagination';
 
 import {
   useGetAllProductsQuery,
@@ -15,12 +16,11 @@ import {
 } from '../../slices/productsApiSlice';
 
 const ProductList = () => {
-  const {
-    data: products,
-    isLoading,
-    error,
-    refetch,
-  } = useGetAllProductsQuery();
+  const { pageNumber } = useParams();
+
+  const { data, isLoading, error, refetch } = useGetAllProductsQuery({
+    pageNumber,
+  });
 
   const [createProduct, { isLoading: isLoadingCreateProduct }] =
     useCreateProductMutation();
@@ -87,7 +87,7 @@ const ProductList = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map(({ _id, name, price, category, brand }) => (
+              {data.products.map(({ _id, name, price, category, brand }) => (
                 <tr key={_id}>
                   <td>
                     <Link to={`/products/${_id}`}>{_id}</Link>
@@ -108,6 +108,7 @@ const ProductList = () => {
               ))}
             </tbody>
           </Table>
+          <Pagination pages={data.pages} page={data.page} isAdmin={true} />
         </Fragment>
       )}
     </Fragment>

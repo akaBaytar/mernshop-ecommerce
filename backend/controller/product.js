@@ -4,10 +4,16 @@ import asyncHandler from '../middleware/asyncHandler.js';
 // @desc      fetch all products
 // @route     GET /api/v1/products
 // @access    public
-const getAllProducts = asyncHandler(async (_, res) => {
-  const products = await Product.find({});
+const getAllProducts = asyncHandler(async (req, res) => {
+  const pageSize = process.env.PAGINATION_LIMIT || 6;
+  const page = +req.query.pageNumber || 1;
+  const count = await Product.countDocuments();
 
-  res.json(products);
+  const products = await Product.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  res.json({ page, pages: Math.ceil(count / pageSize), products });
 });
 
 // @desc      fetch a product
@@ -110,9 +116,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 
     if (alreadyReviewed) {
       res.status(400);
-      throw new Error(
-        'Product already reviewed.'
-      );
+      throw new Error('Product already reviewed.');
     }
 
     const review = {
