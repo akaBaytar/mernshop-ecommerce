@@ -102,7 +102,11 @@ const Product = () => {
                 <ListGroup.Item>
                   <Rating
                     value={product.rating}
-                    text={`${product.numReviews} reviews`}
+                    text={
+                      product.numReviews > 1
+                        ? `${product.numReviews} reviews`
+                        : `${product.numReviews} review`
+                    }
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>
