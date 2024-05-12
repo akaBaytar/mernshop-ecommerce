@@ -38,6 +38,10 @@ label {
   cursor: pointer;
 }
 
+option {
+  background: #ddd;
+}
+
 textarea {
   resize: none;
 }
@@ -313,4 +317,14 @@ textarea {
   color: #777;
   padding: 0.1rem;
   border-radius: 5px;
+}
+
+.review {
+  background-color: rgba(256, 256, 256, 60%);
+
+  & p,
+  & strong {
+    display: block;
+    margin-block-end: 0.25rem;
+  }
 }
