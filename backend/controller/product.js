@@ -7,9 +7,14 @@ import asyncHandler from '../middleware/asyncHandler.js';
 const getAllProducts = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 6;
   const page = +req.query.pageNumber || 1;
-  const count = await Product.countDocuments();
 
-  const products = await Product.find({})
+  const keyword = req.query.keyword
+    ? { name: { $regex: req.query.keyword, $options: 'i' } }
+    : {};
+
+  const count = await Product.countDocuments({ ...keyword });
+
+  const products = await Product.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 

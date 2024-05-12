@@ -8,13 +8,18 @@ import Product from '../../components/Product';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import Pagination from '../../components/Pagination';
+import SearchBox from '../../layout/SearchBox';
 
 const Home = () => {
-  const { pageNumber } = useParams();
-  const { data, isLoading, error } = useGetAllProductsQuery({ pageNumber });
+  const { pageNumber, keyword } = useParams();
+  const { data, isLoading, error } = useGetAllProductsQuery({
+    keyword,
+    pageNumber,
+  });
 
   return (
     <Fragment>
+      <SearchBox/>
       <h2>Latest Products</h2>
       {isLoading ? (
         <Loader />
@@ -31,7 +36,11 @@ const Home = () => {
               </Col>
             ))}
           </Row>
-          <Pagination pages={data.pages} page={data.page} />
+          <Pagination
+            pages={data.pages}
+            page={data.page}
+            keyword={keyword ? keyword : ''}
+          />
         </Fragment>
       )}
     </Fragment>
