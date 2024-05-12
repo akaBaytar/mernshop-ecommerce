@@ -348,3 +348,8 @@ textarea {
   color: #ccc;
   border: 1px solid #ccc;
 }
+
+.caption {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 6px;
+}

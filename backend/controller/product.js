@@ -38,6 +38,15 @@ const getProduct = asyncHandler(async (req, res) => {
   res.json(product);
 });
 
+// @desc      get top rated products
+// @route     GET /api/v1/products/top-rated
+// @access    public
+const getTopProducts = asyncHandler(async (_, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.status(200).json(products);
+});
+
 // @desc      create product
 // @route     POST /api/v1/products
 // @access    private | admin
@@ -150,6 +159,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 export {
   getAllProducts,
   getProduct,
+  getTopProducts,
   createProduct,
   updateProduct,
   deleteProduct,

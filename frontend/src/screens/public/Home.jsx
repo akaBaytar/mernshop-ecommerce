@@ -9,6 +9,7 @@ import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import Pagination from '../../components/Pagination';
 import SearchBox from '../../layout/SearchBox';
+import Carousel from '../../layout/Carousel';
 
 const Home = () => {
   const { pageNumber, keyword } = useParams();
@@ -19,7 +20,8 @@ const Home = () => {
 
   return (
     <Fragment>
-      <SearchBox/>
+      <Carousel />
+      <SearchBox />
       <h2>Latest Products</h2>
       {isLoading ? (
         <Loader />
