@@ -349,7 +349,24 @@ textarea {
   border: 1px solid #ccc;
 }
 
+.carousel-container {
+  text-align: center;
+  background: linear-gradient(to right, #fff, #dedede);
+}
+
 .caption {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 6px;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bs-dark);
 }
